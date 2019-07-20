@@ -21,7 +21,7 @@ public class BeatMuse extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
-		introBackground = new ImageIcon(Main.class.getResource("../images/MainBackground.jpg")).getImage();
+		introBackground = new ImageIcon(Main.class.getResource("../images/MainBackground_title.jpg")).getImage();
 	}
 	
 	public void paint(Graphics g) {
