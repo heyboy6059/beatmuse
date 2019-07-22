@@ -1,5 +1,6 @@
 package beatmuse;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -17,12 +18,18 @@ public class BeatMuse extends JFrame {
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/topbar.png")));
 	
 	public BeatMuse() {
+		setUndecorated(true); // default top menu bar is invisible
 		setTitle("BeatMuse");
-		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT); 
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		setBackground(new Color(0,0,0,0)); // for paintComponents (top menu bar)
+		setLayout(null);
+		
+		menuBar.setBounds(0, 0, 1920, 40);
+		add(menuBar);
 		
 		
 		Music introMusic = new Music("3rd Prototype - Dancefloor [NCS Release].mp3",true);
