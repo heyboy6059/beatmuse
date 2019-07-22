@@ -1,6 +1,7 @@
 package beatmuse;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -17,11 +18,14 @@ public class BeatMuse extends JFrame {
 	private Image screenImage;
 	private Graphics screenGraphic;
 	
+	private ImageIcon closeHoveredImage = new ImageIcon(Main.class.getResource("../images/close_2.png"));
+	private ImageIcon closeDefaultImage = new ImageIcon(Main.class.getResource("../images/close_1.png"));
+	
+	private JButton closeButton = new JButton(closeDefaultImage);
+	
 	private Image introBackground = new ImageIcon(Main.class.getResource("../images/MainBackground_title.jpg")).getImage();
 	
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/topbar.png")));
-	
-	private JButton closeButton = new JButton(new ImageIcon(Main.class.getResource("../images/close_1.png")));
 	
 	private int mouseX, mouseY;
 	
@@ -35,6 +39,30 @@ public class BeatMuse extends JFrame {
 		setVisible(true);
 		setBackground(new Color(0,0,0,0)); // for paintComponents (top menu bar)
 		setLayout(null);
+		
+		
+		closeButton.setBounds(1875,5,40,40);
+		closeButton.setBorderPainted(false);
+		closeButton.setContentAreaFilled(false);
+		closeButton.setFocusPainted(false);
+		closeButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				closeButton.setIcon(closeHoveredImage);
+				closeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				closeButton.setIcon(closeDefaultImage);
+				closeButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		add(closeButton);
+		
 		
 		menuBar.setBounds(0, 0, 1920, 40);
 		menuBar.addMouseListener(new MouseAdapter() {
@@ -53,12 +81,7 @@ public class BeatMuse extends JFrame {
 			}
 		});
 		add(menuBar);
-		
-		closeButton.setBounds(50,50,30,30);
-		closeButton.setBorderPainted(false);
-		closeButton.setContentAreaFilled(false);
-		closeButton.setFocusPainted(false);
-		add(closeButton);
+	
 		
 		Music introMusic = new Music("3rd Prototype - Dancefloor [NCS Release].mp3",true);
 		introMusic.start();
