@@ -5,13 +5,16 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class BeatMuse extends JFrame {
 
 	private Image screenImage;
 	private Graphics screenGraphic;
 	
-	private Image introBackground;
+	private Image introBackground = new ImageIcon(Main.class.getResource("../images/MainBackground_title.jpg")).getImage();
+	
+	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/topbar.png")));
 	
 	public BeatMuse() {
 		setTitle("BeatMuse");
@@ -21,7 +24,6 @@ public class BeatMuse extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
-		introBackground = new ImageIcon(Main.class.getResource("../images/MainBackground_title.jpg")).getImage();
 		
 		Music introMusic = new Music("3rd Prototype - Dancefloor [NCS Release].mp3",true);
 		introMusic.start();
@@ -35,7 +37,8 @@ public class BeatMuse extends JFrame {
 	}
 	
 	public void screenDraw(Graphics g) {
-		g.drawImage(introBackground, 0, 0, null);
+		g.drawImage(introBackground, 0, 0, null); // good for adding images for general use?!
+		paintComponents(g); // good for adding components that stay forever
 		this.repaint();
 	}
 }
