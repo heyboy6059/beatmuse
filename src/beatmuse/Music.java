@@ -35,7 +35,7 @@ public class Music extends Thread {
 	public void close() {
 		isLoop = false;
 		player.close();
-		this.interrupt();
+		this.interrupt(); // close music in thread
 	}
 	
 	@Override
