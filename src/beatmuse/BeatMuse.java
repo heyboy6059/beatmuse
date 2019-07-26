@@ -124,7 +124,9 @@ public class BeatMuse extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//game start event
+				startButton.setVisible(false);
+				quitButton.setVisible(false);
+				background = new ImageIcon(Main.class.getResource("../images/playBackground.jpg")).getImage();
 			}
 		});
 		add(startButton);
