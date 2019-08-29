@@ -40,6 +40,8 @@ public class BeatMuse extends JFrame {
 	private JButton leftButton = new JButton(leftButtonBasicImage);
 	private JButton rightButton = new JButton(rightButtonBasicImage);
 	
+	
+	private Image titleImage = new ImageIcon(Main.class.getResource("../images/Days_Title_Image.png")).getImage();
 	private Image background = new ImageIcon(Main.class.getResource("../images/MainBackground_title.jpg")).getImage();
 	private Image selectedImage = new ImageIcon(Main.class.getResource("../images/first_song_start_image.jpg")).getImage();
 	
@@ -117,7 +119,7 @@ public class BeatMuse extends JFrame {
 		add(quitButton);
 		
 		
-		
+		leftButton.setVisible(false);
 		leftButton.setBounds(200,400,100,100);
 		leftButton.setBorderPainted(false);
 		leftButton.setContentAreaFilled(false);
@@ -140,6 +142,7 @@ public class BeatMuse extends JFrame {
 		});
 		add(leftButton);
 		
+		rightButton.setVisible(false);
 		rightButton.setBounds(1920-300,400,100,100);
 		rightButton.setBorderPainted(false);
 		rightButton.setContentAreaFilled(false);
@@ -184,6 +187,8 @@ public class BeatMuse extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				startButton.setVisible(false);
 				quitButton.setVisible(false);
+				leftButton.setVisible(true);
+				rightButton.setVisible(true);
 				background = new ImageIcon(Main.class.getResource("../images/playBackground.jpg")).getImage();
 				isMainScreen = true;
 			}
@@ -225,8 +230,10 @@ public class BeatMuse extends JFrame {
 		g.drawImage(background, 0, 0, null); // good for adding images for general use?!
 		if(isMainScreen) {
 			g.drawImage(selectedImage, 550, 100, null);
+			g.drawImage(titleImage, 550, 650, null);
 		}
 		paintComponents(g); // good for adding components that stay forever
+		//paintComponents draw something with 'add()' e.g. add(startButton)
 		this.repaint();
 	}
 }
