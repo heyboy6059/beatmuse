@@ -28,11 +28,14 @@ public class BeatMuse extends JFrame {
 	
 
 	
+
+	
 	private JButton closeButton = new JButton(closeDefaultImage);
 	private JButton startButton = new JButton(startButtonBasicImage);
 	private JButton quitButton = new JButton(quitButtonBasicImage);
 	
 	private Image background = new ImageIcon(Main.class.getResource("../images/MainBackground_title.jpg")).getImage();
+	private Image selectedImage = new ImageIcon(Main.class.getResource("../images/first_song_start_image.jpg")).getImage();
 	
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/topbar.png")));
 	
