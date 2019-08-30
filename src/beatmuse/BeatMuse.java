@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,15 +42,22 @@ public class BeatMuse extends JFrame {
 	private JButton rightButton = new JButton(rightButtonBasicImage);
 	
 	
-	private Image titleImage = new ImageIcon(Main.class.getResource("../images/Days_Title_Image.png")).getImage();
+
 	private Image background = new ImageIcon(Main.class.getResource("../images/MainBackground_title.jpg")).getImage();
-	private Image selectedImage = new ImageIcon(Main.class.getResource("../images/first_song_start_image.jpg")).getImage();
 	
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/topbar.png")));
 	
 	private int mouseX, mouseY;
 	
 	private boolean isMainScreen = false;
+	
+	
+	ArrayList<Track> trackList = new ArrayList<Track>();
+	
+	private Image titleImage;
+	private Image selectedImage;
+	private Music selectedMusic;
+	private int nowSelected = 0;
 	
 	public BeatMuse() {
 		setUndecorated(true); // default top menu bar is invisible
@@ -63,6 +71,18 @@ public class BeatMuse extends JFrame {
 		setLayout(null);
 		
 		
+		Music introMusic = new Music("3rd Prototype - Dancefloor [NCS Release].mp3",true);
+		introMusic.start();
+		
+		trackList.add(new Track("Days_Title_Image.png","first_song_start_image.png",
+				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
+		
+		trackList.add(new Track("Days_Title_Image.png","first_song_start_image.png",
+				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
+		
+		trackList.add(new Track("Days_Title_Image.png","first_song_start_image.png",
+				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
+		
 		closeButton.setBounds(1875,5,40,40);
 		closeButton.setBorderPainted(false);
 		closeButton.setContentAreaFilled(false);
@@ -70,8 +90,13 @@ public class BeatMuse extends JFrame {
 		closeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
+
 				closeButton.setIcon(closeHoveredImage);
 				closeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				
+				
+				Music mouseHover = new Music("mouse_hover.mp3",false);
+				mouseHover.start();
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -98,8 +123,14 @@ public class BeatMuse extends JFrame {
 		quitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
+
+				
 				quitButton.setIcon(quitButtonEnteredImage);
 				quitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				
+				
+				Music mouseHover = new Music("mouse_hover.mp3",false);
+				mouseHover.start();
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -108,6 +139,7 @@ public class BeatMuse extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
+
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException ex) {
@@ -129,6 +161,10 @@ public class BeatMuse extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				leftButton.setIcon(leftButtonEnteredImage);
 				leftButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				
+				
+				Music mouseHover = new Music("mouse_hover.mp3",false);
+				mouseHover.start();
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -137,7 +173,7 @@ public class BeatMuse extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//left button event
+				selectLeft();
 			}
 		});
 		add(leftButton);
@@ -152,6 +188,10 @@ public class BeatMuse extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				rightButton.setIcon(rightButtonEnteredImage);
 				rightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				
+				
+				Music mouseHover = new Music("mouse_hover.mp3",false);
+				mouseHover.start();
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -160,7 +200,7 @@ public class BeatMuse extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//right button event
+				selectRight();
 			}
 		});
 		add(rightButton);
@@ -177,6 +217,9 @@ public class BeatMuse extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				startButton.setIcon(startButtonEnteredImage);
 				startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				
+				Music mouseHover = new Music("mouse_hover.mp3",false);
+				mouseHover.start();
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -185,6 +228,11 @@ public class BeatMuse extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
+		
+				
+				introMusic.close();
+				selectTrack(0);
+		
 				startButton.setVisible(false);
 				quitButton.setVisible(false);
 				leftButton.setVisible(true);
@@ -215,8 +263,7 @@ public class BeatMuse extends JFrame {
 		add(menuBar);
 	
 		
-		Music introMusic = new Music("3rd Prototype - Dancefloor [NCS Release].mp3",true);
-		introMusic.start();
+
 	}
 	
 	public void paint(Graphics g) {
@@ -235,5 +282,36 @@ public class BeatMuse extends JFrame {
 		paintComponents(g); // good for adding components that stay forever
 		//paintComponents draw something with 'add()' e.g. add(startButton)
 		this.repaint();
+	}
+	
+	
+	public void selectTrack(int nowSelected) {
+		if(selectedMusic != null) {
+			selectedMusic.close();
+		}
+		
+		titleImage = new ImageIcon(Main.class.getResource("../images/" + trackList.get(nowSelected).getTitleImage())).getImage();
+		selectedImage = new ImageIcon(Main.class.getResource("../images/" + trackList.get(nowSelected).getStartImage())).getImage();
+		selectedMusic = new Music(trackList.get(nowSelected).getStartMusic(), true);
+		selectedMusic.start();
+	
+	}
+	
+	public void selectLeft() {
+		if(nowSelected == 0) {
+			nowSelected = trackList.size() - 1;
+		} else {
+			nowSelected--;
+		selectTrack(nowSelected);
+		}
+	}
+	
+	public void selectRight() {
+		if(nowSelected == trackList.size() - 1) {
+			nowSelected = 0;
+		} else {
+			nowSelected++;
+		selectTrack(nowSelected);
+		}
 	}
 }
