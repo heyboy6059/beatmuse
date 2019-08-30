@@ -74,13 +74,13 @@ public class BeatMuse extends JFrame {
 		Music introMusic = new Music("3rd Prototype - Dancefloor [NCS Release].mp3",true);
 		introMusic.start();
 		
-		trackList.add(new Track("Days_Title_Image.png","first_song_start_image.png",
+		trackList.add(new Track("Days_Title_Image.png","first_song_start_image.jpg",
 				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
 		
-		trackList.add(new Track("Days_Title_Image.png","first_song_start_image.png",
+		trackList.add(new Track("Days_Title_Image.png","second_song_start_image.jpg",
 				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
 		
-		trackList.add(new Track("Days_Title_Image.png","first_song_start_image.png",
+		trackList.add(new Track("Days_Title_Image.png","third_song_start_image.jpg",
 				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
 		
 		closeButton.setBounds(1875,5,40,40);
