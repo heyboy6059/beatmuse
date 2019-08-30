@@ -77,11 +77,11 @@ public class BeatMuse extends JFrame {
 		trackList.add(new Track("Days_Title_Image.png","first_song_start_image.jpg",
 				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
 		
-		trackList.add(new Track("Days_Title_Image.png","second_song_start_image.jpg",
-				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
+		trackList.add(new Track("Sthlm_Title_Image.png","second_song_start_image.jpg",
+				"playBackground.jpg","Ehrling - Sthlm Sunset selected.mp3","Ehrling - Sthlm Sunset.mp3"));
 		
-		trackList.add(new Track("Days_Title_Image.png","third_song_start_image.jpg",
-				"playBackground.jpg","Days Like These Selected.mp3","Days Like These.mp3"));
+		trackList.add(new Track("Stellar_Title_Image.png","third_song_start_image.jpg",
+				"playBackground.jpg","Fuwalito - StellarStream selected.mp3","Fuwalito - StellarStream.mp3"));
 		
 		closeButton.setBounds(1875,5,40,40);
 		closeButton.setBorderPainted(false);
